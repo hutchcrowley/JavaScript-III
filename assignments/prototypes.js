@@ -7,7 +7,71 @@
   
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
-  
+function GameObject(attrs) {
+  this.createdAt = attrs.createdAt;
+  this.name = attrs.name;
+  this.dimensions = attrs.dimensions;
+}
+
+
+GameObject.prototype.destroy = function () {
+  return `${this.name} was removed from the game.`;
+}
+
+
+
+
+
+GameObject.prototype.createdAt = function(attrs) {
+  let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMOnth() + 1;   //January is 0
+    let yyyy = today.getFullYear();
+
+  if (dd<10) {
+    dd = '0'+dd;
+  }
+
+  if (mm < 10) { 
+  mm = '0' +mm;
+}
+
+today = mm + '/' + dd + '/' + yyyy;
+document.write(today);
+
+};
+
+Fruit.prototype.calculateCals = function () {
+  console.log(`Calories in ${this.name} are ${this.calories * 200}`);
+};
+
+
+// Special Attribute because of the .call method 
+
+function Banana(bananaAttrs) {
+  Fruit.call(this, bananaAttrs);
+  this.doMonkeysLikeIt = bananaAttrs.doMonkeysLikeIt;
+}
+
+// Adds a Method to Bananas.prototype
+
+Banana.prototype.checkIfMonkeysLIkeIt = function () {
+  if (this.doMonkeysLikeIt) {
+    return true;
+  } else {
+    return false;
+  };
+
+
+  const newBanana = new Banana({
+    doMonkeysLikeIt: true,
+    type: 'Tree',
+    name: 'Banana',
+    isRipe: false,
+    calories: 0.1
+  });
+
+  console.log(newBanana);
 /*
   === GameObject ===
   * createdAt
@@ -32,7 +96,7 @@
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
- 
+
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
